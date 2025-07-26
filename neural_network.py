@@ -99,9 +99,9 @@ class Neural_Network:
         predictions = np.argmax(output, axis = 1)
         true_labels = np.argmax(y, axis = 1)
         return np.mean(predictions == true_labels)
-
+    
 def one_hot_encode(y, num_classes):
-    # creates a one hot encoded matrix
+    # creates a one hot encoded matrix of label data
     return np.eye(num_classes)[y]
 
 if __name__ == '__main__':
@@ -118,8 +118,9 @@ if __name__ == '__main__':
     x_train = x_train.astype('float32') / 255.0
     x_test = x_test.astype('float32') / 255.0
 
+    # one hot encode labels
     y_train = one_hot_encode(y_train, 10)
-    y_test_orig_labels = y_test # keep labels for example predictions
+    y_test_orig_labels = y_test # keep original labels for example predictions
     y_test = one_hot_encode(y_test, 10)
 
     # initialise neural network (128, 256 neurons for hidden layers)
