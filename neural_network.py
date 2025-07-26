@@ -48,7 +48,23 @@ class Neural_Network:
         return self.final_output
 
 
-    # def backpropagation(self, X, y, output, learning_rate):
+    def backpropagation(self, X, y, output, learning_rate):
+        delta = output - y
+
+        hidden2_error = delta.dot(self.W3.T)
+        hidden2_delta = hidden2_error * self.relu_derivative(self.hidden2_input)
+        
+        hidden1_error = hidden2_delta.dot(self.W2.T)
+        hidden1_delta = hidden1_error * self.relu_derivative(self.hidden1_input)
+        
+        # update weights and biases
+        m = len(X)
+        self.W3 -= np.dot(self.hidden2_output.T, delta) * learning_rate / m
+        self.b3 -= np.sum(delta, axis = 0, keepdims = True) * learning_rate / m
+        self.W2 -= np.dot(self.hidden1_output.T, hidden2_delta) * learning_rate / m
+        self.b2 -= np.sum(hidden2_delta, axis = 0, keepdims = True) * learning_rate / m
+        self.W1 -= np.dot(X.T, hidden1_delta) * learning_rate / m
+        self.b1 -= np.sum(hidden1_delta, axis = 0, keepdims = True) * learning_rate / m
     
 
 
