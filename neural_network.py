@@ -120,7 +120,7 @@ if __name__ == '__main__':
 
     # one hot encode labels
     y_train = one_hot_encode(y_train, 10)
-    y_test_orig_labels = y_test # keep original labels for example predictions
+    y_test_original_labels = y_test # keep original labels for example predictions
     y_test = one_hot_encode(y_test, 10)
 
     # initialise neural network (128, 256 neurons for hidden layers)
@@ -141,4 +141,4 @@ if __name__ == '__main__':
     print("\nExample predictions...")
     predictions = nn.prediction(x_test[:10])
     print(f"Predicted labels: {predictions}")
-    print(f"True labels: {y_test_orig_labels[:10]}")
+    print(f"True labels: {y_test_original_labels[:10]}")
